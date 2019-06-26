@@ -1,16 +1,21 @@
-function setAceitouSalvar(valor) {
-    aceitouSalvar = valor;
-    localStorage.setItem("aceitouSalvar", valor);
-}
+// Encapsulamento
+let aceitouSalvar = JSON.parse(localStorage.getItem('aceitouSalvar')) //null
 
-let aceitouSalvar = JSON.parse(localStorage.getItem('aceitouSalvar'));
+// Ambiente onde ela foi criada
+// Acesso a variaveis do ambiente
+// function setAceitouSalvar é uma "Closure"
+//  privada
+function setAceitouSalvar(valor) {
+    aceitouSalvar = valor
+    localStorage.setItem("aceitouSalvar", valor)
+}
 
 function setAceitou() {
-    setAceitouSalvar(true);
+    setAceitouSalvar(true)
 }
 
-function setNaoAceitou() {
-    setAceitouSalvar(false);
+ function setNaoAceitou() {
+    setAceitouSalvar(false)
 }
 
 // Revealing Module Pattern

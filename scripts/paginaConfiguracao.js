@@ -1,45 +1,53 @@
-/**
- * Função sofre o hoisting e é executada inteira
- * 
- * 
- */
-
 import * as storagePaginaInicial from '/scripts/storage/paginaInicial.js'
-import * as storageAceitouSalvar from '/scripts/storage/aceitouSalvar.js'
+import * as storageAceitouSalvar  from '/scripts/storage/aceitouSalvar.js'
+
 // named export
-// destructuring -> desestruturação, explodindo
+// destructuring
+// desestruturação, explodindo
 import { formataEndereco } from '/scripts/endereco/formataEndereco.js'
 
-$inputPermitiuSalvar.checked = storageAceitouSalvar.aceitouSalvar;
-$inputPaginaInicial.value = storagePaginaInicial.paginaInicial;
+$inputPaginaInicial.value = storagePaginaInicial.paginaInicial
+$inputPermitiuSalvar.checked = storageAceitouSalvar.aceitouSalvar
 
+
+// o que vai ser executado quando clicar
 // o que vai ser executado quando o evento de click acontecer
-// função é um tipo de dado, bem como boolean e com isso pode ser chamado
-// chamando a funcao salvar() pegamos o retorno dela
 $botaoSalvar.onclick = salvar
 
 // função de callback
-// declaração de função
-// function declaration
-function salvar() {
-    /*
-        localStorage.setItem("aceitouSalvar", $inputPermitiuSalvar.checked);
-        localStorage.setItem("paginaInicial", $inputPaginaInicial.value);
-        setAceitouSalvar($inputPermitiuSalvar.checked);
-        setPaginaInicial($inputPaginaInicial.value);
-    */
+// hoisting
+// função é um tipo de dado
+// executada em um outro momento do tempo
+// Declaração de função
+// Function declaration
+function salvar(){
 
-    // expressão de função
-    // function expression
-    // expressão é um valor, declaração é um bloco de código
-    const enderecoCompleto = $inputPermitiuSalvar.checked === true ? storageAceitouSalvar.setAceitou : storageAceitouSalvar.setNaoAceitou;
+    // Expressão de função
+    // Function expression
+    const funcaoEscolhida = $inputPermitiuSalvar.checked === true 
+        ? storageAceitouSalvar.setAceitou
+        : storageAceitouSalvar.setNaoAceitou
+    
+    funcaoEscolhida()
 
-    enderecoCompleto();
-
-    const enderecoCompleto = formataEndereco($inputPaginaInicial.value);
-
-    $inputPaginaInicial.value = enderecoCompleto;
-
-    storagePaginaInicial.setPaginaInicial(enderecoCompleto);
-
+    const enderecoCompleto = formataEndereco($inputPaginaInicial.value)
+    $inputPaginaInicial.value = enderecoCompleto
+    
+    storagePaginaInicial.setPaginaInicial(enderecoCompleto)
 }
+
+$botaoLimpaTudo.addEventListener('click', function() {
+    // TODO apagar tudo menos aceitouSalvar e aceitouTermos
+    const listaChavesLocalStorage = Object.keys(localStorage);
+    
+    for(let i = 0; i < listaChavesLocalStorage.length; i++) {
+        const chave = listaChavesLocalStorage[i];
+        localStorage.removeItem(chave);
+    }
+
+    const listaChavesSessionStorage = Object.keys(sessionStorage);
+    
+    for(let chave of listaChavesSessionStorage) {
+        sessionStorage.removeItem(chave);
+    }
+});

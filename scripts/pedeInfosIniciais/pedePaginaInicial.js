@@ -75,8 +75,10 @@ Type coercing
 // TODO A desgraça dos ESModules no Node
 // TODO Babel IIFEs / CommonJS / AMD / System
 
-import { aceitouSalvar as storageAceitouSalvar } from '/scripts/storage/aceitouSalvar.js';
-import { paginaInicial, setPaginaInicial } from '/scripts/storage/paginaInicial.js';
+import { aceitouSalvar as storageAceitouSalvar } from '/scripts/storage/aceitouSalvar.js'
+import { paginaInicial, setPaginaInicial } from '/scripts/storage/paginaInicial.js'
+
+// named export
 import { formataEndereco } from '/scripts/endereco/formataEndereco.js'
 
 if(storageAceitouSalvar === null || storageAceitouSalvar === true){
@@ -88,13 +90,7 @@ if(storageAceitouSalvar === null || storageAceitouSalvar === true){
     }
 
     if(paginaInicialDefault) {
-        const enderecoCompleto = formataEndereco(paginaInicialDefault);
-
-        $janelaPrincipal.src = enderecoCompleto;
-        $inputEndereco.value = enderecoCompleto;
-        
-        setPaginaInicial(enderecoCompleto);
-
-        localStorage.setItem('paginaInicial', enderecoCompleto)
+        const enderecoCompleto = formataEndereco(paginaInicialDefault)
+        setPaginaInicial(enderecoCompleto)
     }
 }

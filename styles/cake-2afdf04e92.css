@@ -73,3 +73,7 @@ iframe {
     height: 100%;
     border: none;
 }
+
+.disable {
+    opacity: .3;
+}

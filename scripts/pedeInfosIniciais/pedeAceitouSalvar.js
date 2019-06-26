@@ -156,7 +156,7 @@
 
 import * as storageAceitouSalvar from '/scripts/storage/aceitouSalvar.js'
 
-if(storageAceitouSalvar.aceitouSalvar === null) {
+if(storageAceitouSalvar.aceitouSalvar === null){
     // shadowing/sombra no módulo
     // redeclerando com o mesmo nome
     const aceitouSalvar = confirm('Você aceita que a gente salve suas informações?')    
@@ -165,11 +165,9 @@ if(storageAceitouSalvar.aceitouSalvar === null) {
         alert('Você pode mudar isso na página de configurações')
     }
     
-    // localStorage.setItem("aceitouSalvar", aceitouSalvar)
+    const funcaoSalvar = aceitouSalvar === true
+        ? storageAceitouSalvar.setAceitou
+        : storageAceitouSalvar.setNaoAceitou
 
-    // storageAceitouSalvar.setAceitouSalvar(aceitouSalvar);
-
-    const funcaoSalvar = aceitouSalvar === true ? storageAceitouSalvar.setAceitou : storageAceitouSalvar.setNaoAceitou
-
-    funcaoSalvar();
+    funcaoSalvar()
 }
