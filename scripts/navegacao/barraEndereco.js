@@ -1,5 +1,6 @@
 import { carregar } from "/scripts/navegacao/carregar.js";
 import { formataEndereco } from "/scripts/endereco/formataEndereco.js";
+import { Endereco } from "/scripts/endereco/Endereco.js";
 
 /*
     $inputEndereco.onfocus = exibeEnderecoCompleto
@@ -7,26 +8,34 @@ import { formataEndereco } from "/scripts/endereco/formataEndereco.js";
     $janelaPrincipal.onload = exibeEnderecoResumido
 */
 
-$inputEndereco.addEventListener('focus', exibeEnderecoResumido);
+let endereco;
+
+$janelaPrincipal.addEventListener('load', function() {
+    endereco = new Endereco($janelaPrincipal.contentWindow.location.href);
+});
+
+$inputEndereco.addEventListener('focus', exibeEnderecoCompleto);
 $inputEndereco.addEventListener('blur', exibeEnderecoResumido);
 $janelaPrincipal.addEventListener('load', exibeEnderecoResumido);
 
 function exibeEnderecoCompleto(){
-    $inputEndereco.value = $janelaPrincipal.contentWindow.location.href;
+    $inputEndereco.value = endereco.urlCompleta;
 }
 
 function exibeEnderecoResumido() {
-    const url = new URL($janelaPrincipal.contentWindow.location.href);
-    const enderecoResumido = url.hostname;
-
-    $inputEndereco.value = enderecoResumido;
+    $inputEndereco.value = endereco.urlResumida;
 }
 
 $inputEndereco.addEventListener('keyup', function(event) {
     const apertouEnter = event.key === 'Enter';
 
     if (apertouEnter) {
-        const enderecoCompleto = formataEndereco($inputEndereco.value);
-        carregar(enderecoCompleto);
+        endereco = new Endereco($inputEndereco.value);
+        carregar(endereco);
     }
 });
+
+/**
+ * __proto__ serve para armazenar todas as infos que tiver no objeto (todo objeto tem essa propiedade), 
+ * que também é um objeto, olha que doidera
+ */

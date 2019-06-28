@@ -10,11 +10,10 @@ export function adiciona(endereco) {
         // listaSites.slice(0, 2) - retira o espaço que foi atribuído
         listaSites.splice(posicao + 1);
         listaSites.push(endereco);
+        posicao++;
 
         sessionStorage.setItem('historico', JSON.stringify(listaSites));
         sessionStorage.setItem('posicaoHistorico', posicao);
-        
-        posicao++;
     }
 }
 
