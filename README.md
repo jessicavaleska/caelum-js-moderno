@@ -1,2 +1,3 @@
-# js8374
-Curso JavaScript Moderno para Front-end e Back-end - Caelum
+# Curso JavaScript Moderno para front-end e back-end (Caelum)
+
+Repositório com o projeto e as anotações do curso.
